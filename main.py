@@ -98,7 +98,7 @@ print(links)
 
 from bs4 import BeautifulSoup
 
-for i in range(0, 0): 
+for i in range(0, 5): 
     current = links[i]
     print("page " + str(i))
    
@@ -213,10 +213,13 @@ aud.audio(f"Thank you for watching {random.choice(viewers)}! Don't forget to sma
 print("Ready to compile")
 
 
-import compile ############################################ put video together
+import mediaview ############################################ put video together
+
+import compilepymov
 
 
 print("Upload")
+
 
 driver.quit()
 
