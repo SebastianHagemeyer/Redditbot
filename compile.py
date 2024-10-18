@@ -11,8 +11,8 @@ import random
 import ffmpeg
 
 
-fsPATH = "E:/RedditBot"
-normalPATH = "E:\\RedditBot"
+fsPATH = "C:/Automate/RedditBot"
+normalPATH = "C:\\Automate\\RedditBot"
 musicPATH = "E:\\"
 myPATH = normalPATH.replace("\\", "\\\\\\\\")
 
@@ -38,8 +38,8 @@ direcs = []
 def comp():
      os.chdir(normalPATH) #navigate root in os
 
-     os.system("ffmpeg -y -i pic.png -i pic.wav -acodec aac -vcodec mpeg4 pic.mp4") # compile intro view
-     direcs.append(myPATH+'\\\\pic.mp4') #add intro to video order
+     os.system("ffmpeg -y -i ./Out/pic.png -i ./Out/pic.wav -acodec aac -vcodec mpeg4 ./Out/pic.mp4") # compile intro view
+     direcs.append(myPATH+'\\\\Out\\\\pic.mp4') #add intro to video order
 
 
      for i in range(0,5):#loop folder numbers
@@ -127,11 +127,11 @@ def comp():
      os.chdir(normalPATH) # navigate out of folder
 
      # outtro
-     os.system("ffmpeg -y -i out.png -i out.wav -acodec aac -vcodec mpeg4 out.mp4") # compile outtro view
-     os.system("ffmpeg -loop 1 -i out.png -f lavfi -i anullsrc=channel_layout=stereo:sample_rate=22050 -t 5 -c:v copy -t 10 -y out2.mp4") # compile outtro view
+     os.system("ffmpeg -y -i ./Out/out.png -i ./Out/out.wav -acodec aac -vcodec mpeg4 ./Out/out.mp4") # compile outtro view
+     os.system("ffmpeg -loop 1 -i ./Out/out.png -f lavfi -i anullsrc=channel_layout=stereo:sample_rate=22050 -t 5 -c:v copy -t 10 -y ./Out/out2.mp4") # compile outtro view
      ## TRY 48000 samplerate
-     direcs.append(myPATH+'\\\\out.mp4') #add outtro
-     direcs.append(myPATH+'\\\\out2.mp4') #add outtro
+     direcs.append(myPATH+'\\\\Out\\\\out.mp4') #add outtro
+     direcs.append(myPATH+'\\\\Out\\\\out2.mp4') #add outtro
      #
 
      print(direcs)
@@ -146,22 +146,22 @@ def comp():
      os.chdir(normalPATH)
 
      #input()
-     os.system('ffmpeg -y -f concat -safe 0 -i directories.txt -c copy output.mp4')# concat all videos into output
+     os.system('ffmpeg -y -f concat -safe 0 -i directories.txt -c copy ./Out/output.mp4')# concat all videos into output
      ####
      
      os.chdir(musicPATH)
      ran = random.choice(os.listdir("./mus")) 
-     os.system('ffmpeg -y -i '+"./mus/"+ran+' -ar 22050 '+fsPATH+'/ma.wav')
+     os.system('ffmpeg -y -i '+"./mus/"+ran+' -ar 22050 '+fsPATH+'/Out/ma.wav')
      os.chdir(normalPATH)
 
      
-     os.system('ffmpeg -y -i output.mp4 -f wav -ar 22050 -vn outputwav.wav')
-     os.system('ffmpeg -y -stream_loop 3 -i ma.wav -filter:a "volume=0.3" low.wav')
-     os.system('ffmpeg -y -i low.wav -i outputwav.wav \
+     os.system('ffmpeg -y -i ./Out/output.mp4 -f wav -ar 22050 -vn  ./Out/outputwav.wav')
+     os.system('ffmpeg -y -stream_loop 3 -i ./Out/ma.wav -filter:a "volume=0.3"  ./Out/low.wav')
+     os.system('ffmpeg -y -i  ./Out/low.wav -i  ./Out/outputwav.wav \
                          -filter_complex "[1:a]asplit=2[sc][mix];[0:a][sc]sidechaincompress=threshold=0.05:ratio=3[bg]; \
                          [bg][mix]amerge[merge]" \
-                         -map [merge] merge.wav')
-     os.system('ffmpeg -y -i output.mp4 -i merge.wav -map 0:v -map 1:a -c:a aac -vcodec copy withmusic.mp4')
+                         -map [merge]  ./Out/merge.wav')
+     os.system('ffmpeg -y -i  ./Out/output.mp4 -i  ./Out/merge.wav -map 0:v -map 1:a -c:a aac -vcodec copy  ./Out/withmusic.mp4')
 
      #get thumbnail
      import glob
