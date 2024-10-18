@@ -1,0 +1,19 @@
+# Ignore Python compiled files
+__pycache__/
+*.pyc
+
+# Ignore folders with numerical names if they are not needed
+0/
+1/
+2/
+3/
+4/
+
+selenium/
+
+
+# Ignore all .wav files
+*.wav
+
+# Ignore all .mp4 files
+*.mp4

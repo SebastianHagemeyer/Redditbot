@@ -1,0 +1,2 @@
+python get.py
+PAUSE
