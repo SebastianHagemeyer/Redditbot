@@ -9,7 +9,10 @@ __pycache__/
 3/
 4/
 
+# Ignore the selenium and output save stuff
 selenium/
+Out/
+chrome/
 
 
 # Ignore all .wav files
