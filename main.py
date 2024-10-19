@@ -221,6 +221,35 @@ import compilepymov
 print("Upload")
 
 
+############################################ Upload
+
+import datetime
+
+now = datetime.datetime.now()
+
+counter = 1;
+topicList = "";
+for tt in allTopics:
+    topicList = topicList + str(counter) + ". " + tt + "\n"
+    counter += 1
+    
+# str(now.strftime("%A")
+desc = "Join us for the latest scoop on the funniest and most talked-about memes and drama from the popular subreddit /r/" + subname  + ". \n" \
+            + random.choice(["Today we're looking at:", "Today we're covering:", "In this episode, we're diving into the latest happenings, including:"]) \
+            + "\n" + topicList + "\n Don't miss out on the laughs and join us for the latest memes and drama from the world of Reddit!"
+
+f = open("desc.txt", "w", encoding = 'utf-8' )
+f.write(desc)
+f.close()
+descfile = "desc.txt"
+
+categ = "Entertainment"
+tags = "reddit, news, " + subname
+
+u= subprocess.call("youtube-upload --title=\" "+firstTitle+" \" --description-file=\"" + descfile +"\" --thumbnail \""+myPATH+"\\0\\thumb.png\" --category=\""+categ+"\" --tags=\""+tags+"\" ./withmusic.mp4",shell=True)
+print(u)
+
+
 driver.quit()
 
 
